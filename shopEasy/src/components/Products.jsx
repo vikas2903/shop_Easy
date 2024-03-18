@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+
+
 const Products = (curElem) => {
   const { id, name, image, price, category } = curElem;
   return (

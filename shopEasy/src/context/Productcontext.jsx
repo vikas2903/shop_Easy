@@ -9,6 +9,8 @@ const initialstate = {
   isError:false,
   products :[],
   featureProducts: [],
+  isSingleLoading: false,
+  singleProduct: {},
 }
   
 const AppProvider = ({ children }) => {
@@ -137,9 +139,25 @@ const AppProvider = ({ children }) => {
           dispatch({type: "API ERROR"});
         }  
       }
+
+      const getsingleProducts = async(url) =>{
+        dispatch({type: "SET_SINGLE_LOADING"});
+        try{
+          const singleProductResponse = await axios.get(url);
+          const singleProductResData = await singleProductResponse.data;
+          dispatch({type: "SET_SINGLE_PRODUCT_DATA", payload:singleProductResData});
+          console.log(singleProductResData);
+        }
+        catch(error){
+          dispatch({type: "SET_SINGLE_ERROR", payload: error});
+
+        }
+      }
+      
     
       useEffect(()=>{
         getProducts(API);
+        // singleProducts('https://api.pujakaitem.com/api/products?id=thapaserialnoa');
 
       },[]);
 
@@ -156,7 +174,7 @@ const AppProvider = ({ children }) => {
 
 
   return (
-    <AppContext.Provider value={{ bagsData, setContextData , shoesData, setshoesContextData, ...state } } >
+    <AppContext.Provider value={{ bagsData, setContextData , shoesData, setshoesContextData, ...state, getsingleProducts } } >
       {children}
     </AppContext.Provider>
   );
