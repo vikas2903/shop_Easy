@@ -15,6 +15,7 @@ import Footer from './components/Footer'
 // import Announcemantbar from './components/Announcementbar'
 import Subscribe from './components/Subscribe';
 import FeatureProductsPage from './components/FeatureProductsPage';
+import Addproduct from './components/Addproduct';
 
 function App() {
 
@@ -59,6 +60,7 @@ function App() {
         <Route path='/cart' element={<Cart />} />
         <Route path='*' element={<Error />} />
         <Route path="/featureproductspage" element={<FeatureProductsPage />} />
+        <Route path="/Addproduct" element={<Addproduct/>} />
       </Routes>
       < Subscribe/>
       <Footer />
